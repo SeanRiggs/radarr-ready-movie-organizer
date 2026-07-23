@@ -27,11 +27,11 @@ for MOVIE_DIR in "${MOVIE_DIRS[@]}"; do
     cd "$MOVIE_DIR" || exit
 
     # Get the total number of movie files for progress tracking
-    total_files=$(ls *.{mp4,mkv,avi,m4v} 2>/dev/null | wc -l)
+    total_files=$(ls *.{mp4,mkv,avi,m4v,AVI,mp4,wmv,ogv,mov,divx,mpg} 2>/dev/null | wc -l)
     processed=0
 
     # Loop through each movie file
-    for movie in *.{mp4,mkv,avi,m4v}; do
+    for movie in *.{mp4,mkv,avi,m4v,AVI,mp4,wmv,ogv,mov,divx,mpg}; do
       # Check if it's a file (not a directory)
       if [ -f "$movie" ]; then
         # Get the filename without extension
