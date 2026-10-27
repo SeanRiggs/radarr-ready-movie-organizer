@@ -1,0 +1,29 @@
+name: Test movie organization and replacement
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    strategy:
+      matrix:
+        python: ['3.10', '3.12', '3.14']
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Check syntax
+        run: |
+          sh -n organize_movies.sh
+          python -m py_compile organize_movies.py
+      - name: Test against temporary movie libraries
+        run: python -m unittest discover -s tests -v
